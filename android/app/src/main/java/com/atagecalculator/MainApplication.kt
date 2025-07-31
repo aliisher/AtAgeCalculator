@@ -1,4 +1,4 @@
-package com.atagecalculator
+package com.arslantech.atagecalculator
 
 import android.app.Application
 import com.facebook.react.PackageList

@@ -1,4 +1,4 @@
-package com.atagecalculator
+package com.arslantech.atagecalculator
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
