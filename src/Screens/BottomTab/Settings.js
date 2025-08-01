@@ -33,28 +33,67 @@ const Settings = () => {
         onPress={() =>
           navigation.navigate('PrivacyPolicy', {
             htmlContent: `
-              <html>
-                <head>
-                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                  <style>
-                    body { font-family: Arial; padding: 20px; background: #fff; color: #000; }
-                    h2 { color: #FA6C3A; }
-                    h3 { margin-top: 20px; }
-                    p, li { font-size: 16px; line-height: 1.6; }
-                  </style>
-                </head>
-                <body>
-                  <h2>Privacy Policy</h2>
-                  <p>This app respects your privacy. We do not collect or share personal data.</p>
-                  <h3>Data Collection</h3>
-                  <p>No personal information is collected.</p>
-                  <h3>Changes</h3>
-                  <p>We may update this policy. Check regularly for updates.</p>
-                  <h3>Contact</h3>
-                  <p>Contact us at info@bellelonlimited.com for any questions.</p>
-                </body>
-              </html>
-            `,
+        <html>
+          <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+              body { font-family: Arial; padding: 20px; background: #fff; color: #000; }
+              h2 { color: #FA6C3A; }
+              h3 { margin-top: 20px; color: #333; }
+              p, li { font-size: 16px; line-height: 1.6; }
+              ul { padding-left: 20px; }
+            </style>
+          </head>
+          <body>
+            <h2>Privacy Policy</h2>
+            <p><strong>Effective Date:</strong> 1 July 2025</p>
+            <p>Thank you for using <strong>AT Age Calculator</strong>.</p>
+            <p>Your privacy is important to us. This Privacy Policy is meant to help you understand how we handle any information related to your use of our app.</p>
+
+            <h3>1. No Data Collection</h3>
+            <p>We do not collect, store, or share any personal or sensitive user data. All inputs (like date of birth) are processed locally on your device and are never stored or transmitted.</p>
+
+            <h3>2. No Permissions Required</h3>
+            <p>The app does not request or use any device permissions such as:</p>
+            <ul>
+              <li>Location</li>
+              <li>Camera</li>
+              <li>Contacts</li>
+              <li>Microphone</li>
+              <li>Storage</li>
+              <li>Phone status</li>
+            </ul>
+            <p>You can use the app fully without granting any permissions.</p>
+
+            <h3>3. No Internet or Network Access</h3>
+            <p>This app works completely offline and does not connect to the internet or any external server. There are:</p>
+            <ul>
+              <li>No background data transfers</li>
+              <li>No third-party APIs or SDKs</li>
+              <li>No hidden tracking or analytics</li>
+            </ul>
+
+            <h3>4. No Ads or Analytics</h3>
+            <p>We do not show ads, track users, or use any analytics or advertising networks.</p>
+
+            <h3>5. Children’s Privacy</h3>
+            <p>This app is safe for all ages. Since we collect no personal data, we are compliant with Google Play Families Policy and COPPA.</p>
+
+            <h3>6. Security</h3>
+            <p>Even though no data is collected, the app is built with secure coding practices and does not include any malicious code.</p>
+
+            <h3>7. Policy Updates</h3>
+            <p>If we make any updates to this policy, they will be posted inside the app or on our website.</p>
+
+            <h3>8. Contact Us</h3>
+            <p>If you have any questions about this Privacy Policy:</p>
+            <ul>
+              <li>Email: info@itorbit.co</li>
+              <li>Website: <a href="https://itorbit.co/" target="_blank">https://itorbit.co/</a></li>
+            </ul>
+          </body>
+        </html>
+      `,
           })
         }
       >

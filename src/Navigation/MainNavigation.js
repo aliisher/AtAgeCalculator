@@ -11,7 +11,7 @@ export default function MainNavigation() {
     <NavigationContainer>
       <MAIN_STACK.Navigator
         screenOptions={{ headerShown: false }}
-        initialRouteName="FlowNavigation"
+        initialRouteName="SplashScreen"
       >
         <MAIN_STACK.Screen name="SplashScreen" component={SplashScreen} />
         <MAIN_STACK.Screen name="FlowNavigation" component={FlowNavigation} />

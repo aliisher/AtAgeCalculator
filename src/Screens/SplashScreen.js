@@ -1,8 +1,25 @@
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Image, SafeAreaView, StyleSheet } from 'react-native';
 import { hp, wp } from '../Constant/Responsive';
+import { useIsFocused } from '@react-navigation/native';
 
-const SplashScreen = () => {
+const SplashScreen = ({ navigation }) => {
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    let timeout;
+
+    if (isFocused) {
+      timeout = setTimeout(() => {
+        navigation.replace('FlowNavigation');
+      }, 2000);
+    }
+
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [isFocused, navigation]);
+
   return (
     <SafeAreaView style={styles.container}>
       <Image
@@ -21,6 +38,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#FFEFF4',
   },
 });

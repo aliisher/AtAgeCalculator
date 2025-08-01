@@ -1,17 +1,29 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Platform,
+} from 'react-native';
 import React, { useState } from 'react';
-import DatePicker from 'react-native-datepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { wp, hp } from '../../Constant/Responsive';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Home = () => {
-  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [showPicker, setShowPicker] = useState(false);
   const [age, setAge] = useState(null);
 
   const calculateAge = () => {
     if (!selectedDate) return;
 
-    const birthDate = new Date(selectedDate.split('-').reverse().join('-'));
+    const birthDate = new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth(),
+      selectedDate.getDate(),
+    );
     const today = new Date();
 
     let years = today.getFullYear() - birthDate.getFullYear();
@@ -20,7 +32,8 @@ const Home = () => {
 
     if (days < 0) {
       months--;
-      days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+      days += prevMonth.getDate();
     }
 
     if (months < 0) {
@@ -29,6 +42,16 @@ const Home = () => {
     }
 
     setAge({ years, months, days });
+  };
+
+  const onChange = (event, date) => {
+    if (event.type === 'dismissed') {
+      setShowPicker(false);
+      return; // don’t update selectedDate
+    }
+
+    setShowPicker(Platform.OS === 'ios');
+    if (date) setSelectedDate(date);
   };
 
   return (
@@ -43,35 +66,47 @@ const Home = () => {
 
       <Text style={styles.label}>Select Your Birth Date</Text>
 
-      <View style={styles.inputCard}>
+      <TouchableOpacity
+        style={styles.inputCard}
+        onPress={() => setShowPicker(true)}
+      >
         <Ionicons
           name="calendar-outline"
           size={wp(5.5)}
           color="#FA6C3A"
           style={styles.icon}
         />
+        <Text style={selectedDate ? styles.dateText : styles.placeholderText}>
+          {selectedDate
+            ? selectedDate.toLocaleDateString('en-GB')
+            : 'DD - MM - YYYY'}
+        </Text>
+      </TouchableOpacity>
 
-        <DatePicker
-          style={styles.datePicker}
-          date={selectedDate}
+      {showPicker && (
+        <DateTimePicker
+          value={selectedDate || new Date()}
           mode="date"
-          androidMode="spinner" // Add this line
-          placeholder="DD - MM - YYYY"
-          format="DD-MM-YYYY"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          showIcon={false} // Optional: hide default icon
-          customStyles={{
-            dateInput: styles.dateInput,
-            placeholderText: styles.placeholderText,
-            dateText: styles.dateText,
-          }}
-          onDateChange={date => setSelectedDate(date)}
+          display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+          maximumDate={new Date()}
+          onChange={onChange}
         />
-      </View>
+      )}
 
       <TouchableOpacity style={styles.button} onPress={calculateAge}>
         <Text style={styles.buttonText}>Calculate Age</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[
+          styles.button,
+          { backgroundColor: '#B5B5B5', marginTop: hp(2) },
+        ]}
+        onPress={() => {
+          setSelectedDate('');
+          setAge(null);
+        }}
+      >
+        <Text style={[styles.buttonText, { color: '#fff' }]}>Reset</Text>
       </TouchableOpacity>
 
       {age && (
@@ -130,14 +165,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: wp(2),
-  },
-  datePicker: {
-    flex: 1,
-  },
-  dateInput: {
-    borderWidth: 0,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
   },
   placeholderText: {
     color: '#B5B5B5',
