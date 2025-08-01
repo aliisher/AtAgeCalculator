@@ -55,10 +55,12 @@ const Home = () => {
           style={styles.datePicker}
           date={selectedDate}
           mode="date"
+          androidMode="spinner" // Add this line
           placeholder="DD - MM - YYYY"
           format="DD-MM-YYYY"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
+          showIcon={false} // Optional: hide default icon
           customStyles={{
             dateInput: styles.dateInput,
             placeholderText: styles.placeholderText,
